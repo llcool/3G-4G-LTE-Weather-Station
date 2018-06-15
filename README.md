@@ -20,4 +20,4 @@ Hardware:
 Software:
 ---------
 * Debian custom firmware bone-debian-9.2-console-armhf-2017-12-08-2gb.img.xz
-* [WeeWX] (http://www.weewx.com/) (open source weather software) 
+* [WeeWX](http://www.weewx.com/) open source weather software
