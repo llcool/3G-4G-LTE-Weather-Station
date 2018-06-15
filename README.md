@@ -5,8 +5,8 @@ The project is for my local paraglidng club to setup a Davis Weather in a remote
 
 Hardware:
 ---------
-* Davis Vantage Pro2 Wireless Weather Station 6152
-* Davis Complete System Shelter for all weather station components 7724
+* Davis Vantage Pro2 Wireless Weather Station (6152)
+* Davis Complete System Shelter for all weather station components (7724)
 * Davis USB Data Logger
 * Beaglebone Black
 * USB to Serial cable FTDI TTL-232R-3V3 (optional)
@@ -20,3 +20,4 @@ Hardware:
 Software:
 ---------
 * Debian custom firmware bone-debian-9.2-console-armhf-2017-12-08-2gb.img.xz
+* [WeeWX] (http://www.weewx.com/) (open source weather software) 
