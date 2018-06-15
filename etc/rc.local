@@ -1,1 +1,75 @@
+#!/bin/sh
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
 
+# Weather Station power saving...
+# Set ENABLE to "true" to let the script run at boot time.
+ENABLE=""
+NAME=rtcwake
+WAITTIME=120
+WAKETIME=60
+SLEEPTIME=300
+DAYTIME=06:30
+NIGHTTIME=21:00
+NSLEEPTIME=1800
+SETTIME="false"
+RUN=/usr/sbin/$NAME
+RUNOPTS="-m standby -s"
+WAITFOR="wunderground.com"
+TRY=30
+RETRIES=0
+
+# if not enabled then exit gracefully
+[ "$ENABLE" = "true" ] || exit 0
+
+# Exit if the package is not installed
+[ -x "$RUN" ] || exit 0
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+# and status_of_proc is working.
+. /lib/lsb/init-functions
+
+sleep $WAITTIME
+
+while true; do
+    sleep $WAKETIME
+    service weewx stop
+    yes | /usr/bin/wee_device --clear
+    
+    DAY=$(date "+%u")
+    if [ "$DAY" -eq 7 ] && [ "$SETTIME" = "false" ]
+    then
+        SETTIME="true"
+        /usr/bin/wee_device --set-time
+    elif [ "$DAY" -ne 7 ]
+    then
+        SETTIME="false"
+    fi
+    
+    NOW=$(date "+%s")
+    if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
+    then
+        $RUN $RUNOPTS $SLEEPTIME
+    else
+        $RUN $RUNOPTS $NSLEEPTIME
+    fi
+	
+    connmand-wait-online
+	
+    service weewx start
+done
+
+exit 0
