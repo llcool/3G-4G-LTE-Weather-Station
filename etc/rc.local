@@ -15,7 +15,7 @@
 # Set ENABLE to "true" to let the script run at boot time.
 ENABLE=""
 NAME=rtcwake
-WAITTIME=120
+WAITTIME=60
 WAKETIME=60
 SLEEPTIME=300
 DAYTIME=06:30
