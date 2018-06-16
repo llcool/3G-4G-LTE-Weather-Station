@@ -24,9 +24,6 @@ NSLEEPTIME=1800
 SETTIME="false"
 RUN=/usr/sbin/$NAME
 RUNOPTS="-m standby -s"
-WAITFOR="wunderground.com"
-TRY=30
-RETRIES=0
 
 # if not enabled then exit gracefully
 [ "$ENABLE" = "true" ] || exit 0
