@@ -1,0 +1,30 @@
+
+// Debian
+Edit /etc/init.d/cpufrequtils
+Set GOVERNOR="powersave"
+Set MAX_SPEED="300"
+Set MIN_SPEED="300"
+
+
+
+// Ubuntu
+Edit /etc/init.d/cpufrequtils
+Set GOVERNOR="powersave"
+
+Disable ondemand
+# cd /etc/rc2.d
+# mv S99ondemand K99ondemand
+
+# cd /etc/rc3.d
+# mv S99ondemand K99ondemand
+
+# cd /etc/rc3.d
+# mv S99ondemand K99ondemand
+
+# cd /etc/rc4.d
+# mv S99ondemand K99ondemand
+
+# cd /etc/rc5.d
+# mv S99ondemand K99ondemand
+
+# reboot
