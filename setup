@@ -1,0 +1,52 @@
+Running debian for the first time.
+
+Login
+$ sudo su
+# apt update
+# apt upgrade
+# dpkg-reconfigure tzdata
+# dpkg-reconfigure locales
+# apt install wvdial ppp
+# wget -qO - http://weewx.com/keys.html | sudo apt-key add -
+# wget -qO - http://weewx.com/apt/weewx.list | sudo tee /etc/apt/sources.list.d/weewx.list
+# apt update
+Copy rc.local to /etc/rc.local, modify the power saving time if necessary.
+# apt install weewx
+
+When you are done, weeWX will be running in the background as a daemon. 
+
+# tailf /var/log/syslog
+
+
+Add to .bashrc
+
+# Shut down power saving?
+while true; do
+    read -p "Shut down powersaver [Y/n]?" yn
+    case $yn in
+        [Yy]* ) 
+            sudo service rc.local stop;
+            sudo systemctl daemon-reload;
+            break;;
+        [Nn]* )
+            break;;
+        * )
+            echo "Please answer y or n";;
+    esac
+done
+
+Add to .bash_logut
+
+# Start power saving?
+while true; do
+    read -p "Start powersaver [Y/n]?" yn
+    case $yn in
+        [Yy]* ) 
+            sudo service rc.local start;
+            break;;
+        [Nn]* )
+            break;;
+        * )
+            echo "Please answer y or n";;
+    esac
+done
