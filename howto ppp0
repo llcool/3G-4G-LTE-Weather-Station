@@ -1,0 +1,106 @@
+Using a Nokia 6303 set connectivity to PC Suite
+Settings->Connectivity->USB data cable->PC Suite
+
+
+Check modem connection
+# wvdialconf create
+
+You should get something like this...
+
+Scanning your serial ports for a modem.
+Port Scan: S0 S1 S2 S3
+WvModem: Cannot get information for serial port.
+ttyACM0: ATQ0 V1 E1 — OK
+ttyACM0: ATQ0 V1 E1 Z — OK
+ttyACM0: ATQ0 V1 E1 S0=0 — OK
+ttyACM0: ATQ0 V1 E1 S0=0 &C1 — OK
+ttyACM0: ATQ0 V1 E1 S0=0 &C1 &D2 — OK
+ttyACM0: ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0 — OK
+ttyACM0: Modem Identifier: ATI — Nokia
+ttyACM0: Speed 4800: AT — OK
+ttyACM0: Speed 9600: AT — OK
+ttyACM0: Speed 19200: AT — OK
+ttyACM0: Speed 38400: AT — OK
+ttyACM0: Speed 57600: AT — OK
+ttyACM0: Speed 115200: AT — OK
+ttyACM0: Speed 230400: AT — OK
+ttyACM0: Speed 460800: AT — OK
+ttyACM0: Max speed is 460800; that should be safe.
+ttyACM0: ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0 — OK
+Found an USB modem on /dev/ttyACM0.
+Modem configuration written to create.
+ttyACM0: Speed 460800; init “ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0″
+
+
+
+Edit the dialer configuration file
+
+# nano /etc/wvdial.conf
+
+[Dialer Defaults]
+New PPPD = yes
+Modem = /dev/ttyACM0
+Baud = 460800
+Init1 = ATZ
+Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0
+ISDN = 0
+Modem Type = Analog Modem
+Phone = *99#
+Stupid Mode = 1
+Init3 = AT+CGDCONT=1,"IP","giffgaff.com","",0,0
+Username = giffgaff
+Password =  " "
+
+
+
+Edit the ppp peers
+
+# nano /etc/ppp/peers/wvdial
+noauth
+name wvdial
+usepeerdns
+defaultroute
+replacedefaultroute
+
+
+
+Start the dialer ppp network (test)
+
+# wvdial
+
+
+If ok, add ppp to the network file
+
+# nano /etc/network/interfaces
+
+### Debian start ###
+# GPRS network
+allow-hotplug usbpn0
+iface usbpn0 inet manual
+    pre-up /sbin/ifconfig usbpn0 up
+    up ifup ppp0=gprs
+    down ifdown ppp0=gprs
+    post-down /sbin/ifconfig usbpn0 down
+# The following is used internally only
+iface gprs inet wvdial
+### Debian end ###
+
+### Ubuntu start ###
+auto ppp0
+iface ppp0 inet wvdial
+
+Use the wvdial init script to monitor and restart pppd when the line drops...
+Copy the wvdial file to /etc/init.d/wvdial
+
+Create the rc symlinks
+
+# cd /etc/rc2.d
+# ln -s ../init.d/wvdial S21wvdial
+# cd /etc/rc3.d
+# ln -s ../init.d/wvdial S21wvdial
+# cd /etc/rc4.d
+# ln -s ../init.d/wvdial S21wvdial
+# cd /etc/rc5.d
+# ln -s ../init.d/wvdial S21wvdial
+### Ubuntu end ###
+
