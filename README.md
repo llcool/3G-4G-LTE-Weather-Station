@@ -13,6 +13,8 @@ Hardware:
 * USB A micro cable
 * USB A mini cable
 * USB hub
+* Huawei 3G modem (E3531)
+* 4G/3G SIM card
 * Sunix 10A 12V/24V Solar Charge Regulator
 * 20W 12V Photonic Universe solar panel
 * 12v 7ah Sealed Lead Acid Rechargeable Battery
