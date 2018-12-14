@@ -1,7 +1,7 @@
 # GPRS-Weather-Station
 GPRS for Davis Weather Station using a Beaglebone Black and Debian custom firmware
 
-The project is for my local paraglidng club to setup a Davis Weather in a remote location with internet access.
+The project is for my local paragliding club to setup a Davis Weather in a remote location with internet access.
 
 Hardware:
 ---------
