@@ -12,7 +12,7 @@ Hardware:
 * USB to Serial cable FTDI TTL-232R-3V3 (optional)
 * USB A micro cable
 * USB A mini cable
-* USB hub
+* USB (optional powered) hub (Belkin Ultra Slim 4 Port USB powered hub 5v input)
 * Huawei 3G modem (E3531)
 * 4G/3G SIM card
 * Sunix 10A 12V/24V Solar Charge Regulator
