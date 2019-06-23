@@ -1,3 +1,3 @@
 #!/bin/bash
 
-psftp -pw <password> -b uploadfile.sftp <username>@<host>
+psftp -pw <password> -b /etc/uploadfile.sftp <username>@<host>
