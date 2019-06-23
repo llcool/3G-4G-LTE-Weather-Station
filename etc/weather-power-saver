@@ -65,7 +65,7 @@ while true; do
     # Optional webcam (daytime only)
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
     then
-        fswebcam --font sans:32 -r 1920x1280 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 95 --title "NHPC webcam - East Hill" image.jpg --exec /etc/upload.sh
+        fswebcam -r 640x480 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 95 --title "NHPC webcam - East Hill" image.jpg --exec /etc/upload.sh
     fi
     
     service weewx start
