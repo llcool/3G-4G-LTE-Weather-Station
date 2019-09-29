@@ -15,6 +15,8 @@ $ sudo su
 Copy rc.local to /etc (Modify the power saving time if necessary)
 Copy weather-power-saver to /etc
 
+# chmod +x /etc/weather-power-saver
+
 Only copy these file if you have a webcam and are sftp-ing the image.
 Copy upload.sh to /etc (Edit and add the username, password and host)
 Copy uploadfile.sftp to /etc
