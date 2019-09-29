@@ -11,7 +11,11 @@ $ sudo su
 # wget -qO - http://weewx.com/keys.html | sudo apt-key add -
 # wget -qO - http://weewx.com/apt/weewx.list | sudo tee /etc/apt/sources.list.d/weewx.list
 # apt update
-Copy rc.local to /etc/rc.local, modify the power saving time if necessary.
+
+Copy rc.local to /etc (Modify the power saving time if necessary)
+Copy upload.sh to /etc (Edit and add the username, password and host)
+Copy 
+
 # apt install weewx
 
 When you are done, weeWX will be running in the background as a daemon. 
