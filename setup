@@ -18,7 +18,9 @@ Copy weather-power-saver to /etc
 Only copy these file if you have a webcam and are sftp-ing the image.
 Copy upload.sh to /etc (Edit and add the username, password and host)
 Copy uploadfile.sftp to /etc
-# chmod +x /etc/upload.sh
+
+# chmod +x /etc/upload.sh (webcam only)
+# apt install fswebcam (webcam only)
 
 # apt install weewx
 
