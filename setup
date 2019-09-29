@@ -13,8 +13,11 @@ $ sudo su
 # apt update
 
 Copy rc.local to /etc (Modify the power saving time if necessary)
+Copy weather-
+
+Only copy these file if you have a webcam and are sftp-ing the image.
 Copy upload.sh to /etc (Edit and add the username, password and host)
-Copy 
+Copy uploadfile.sftp to /etc
 
 # apt install weewx
 
