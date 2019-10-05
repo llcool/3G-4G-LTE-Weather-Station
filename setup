@@ -27,7 +27,10 @@ Copy uploadfile.sftp to /etc
 
 # apt install weewx
 
-When you are done, weeWX will be running in the background as a daemon. 
+When you are done, weeWX will be running in the background as a daemon.
+
+If you are using a third-party weather service. EG. Weather underground. 
+Edit the /etc/weewx/weewx.conf add your usename ans password.
 
 # tailf /var/log/syslog
 
