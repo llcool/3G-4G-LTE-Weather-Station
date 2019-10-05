@@ -7,7 +7,7 @@ $ sudo su
 # apt upgrade
 # dpkg-reconfigure tzdata
 # dpkg-reconfigure locales
-# apt install wvdial ppp
+
 # wget -qO - http://weewx.com/keys.html | sudo apt-key add -
 # wget -qO - http://weewx.com/apt/weewx.list | sudo tee /etc/apt/sources.list.d/weewx.list
 # apt update
@@ -23,7 +23,7 @@ Copy upload.sh to /etc (Edit and add the username, password and host)
 Copy uploadfile.sftp to /etc
 
 # chmod +x /etc/upload.sh (webcam only)
-# apt install fswebcam (webcam only)
+# apt install fswebcam putty-tools (webcam only)
 
 # apt install weewx
 
