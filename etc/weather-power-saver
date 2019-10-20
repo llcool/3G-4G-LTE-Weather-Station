@@ -60,7 +60,7 @@ while true; do
         $RUN $RUNOPTS $NSLEEPTIME
     fi
     
-    connmand-wait-online --timeout 60
+    command-wait-online --timeout 60
     
     # Optional webcam (daytime only)
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
