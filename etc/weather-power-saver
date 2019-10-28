@@ -62,13 +62,14 @@ while true; do
     
     command-wait-online --timeout 60
     
+    service weewx start
+    
     # Optional webcam (daytime only)
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
     then
         fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" /tmp/image.jpg --exec /etc/upload.sh
     fi
     
-    service weewx start
 done
 
 exit 0
