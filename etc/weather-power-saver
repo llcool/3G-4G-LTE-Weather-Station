@@ -59,9 +59,7 @@ while true; do
     else
         $RUN $RUNOPTS $NSLEEPTIME
     fi
-    
-    command-wait-online --timeout 60
-    
+       
     service weewx start
     
     # Optional webcam (daytime only)
