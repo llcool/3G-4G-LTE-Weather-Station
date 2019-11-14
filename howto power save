@@ -8,8 +8,19 @@ Set MIN_SPEED="300"
 
 
 // Ubuntu
+Edit /boot/uEnv.txt
+###Disable auto loading of virtual capes (emmc/video/wireless/adc)
+#disable_uboot_overlay_emmc=1
+disable_uboot_overlay_video=1
+disable_uboot_overlay_audio=1
+disable_uboot_overlay_wireless=1
+disable_uboot_overlay_adc=1
+
+
 Edit /etc/init.d/cpufrequtils
 Set GOVERNOR="powersave"
+Set MAX_SPEED="300"
+Set MIN_SPEED="300"
 
 Disable ondemand
 # cd /etc/rc2.d
