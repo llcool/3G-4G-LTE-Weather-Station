@@ -32,6 +32,13 @@ When you are done, weeWX will be running in the background as a daemon.
 If you are using a third-party weather service. EG. Weather underground. 
 Edit the /etc/weewx/weewx.conf add your usename ans password.
 
+NOTE: vantage: LOOP try #1; error: Expected to read 99 chars; got 0 instead
+edit /usr/shared/weewx/weewx/drivers/vantage.py
+Change: 200 to 100
+    for _loop_packet in self.genDavisLoopPackets(200):
+to:
+    for _loop_packet in self.genDavisLoopPackets(100):
+
 # tailf /var/log/syslog
 
 
