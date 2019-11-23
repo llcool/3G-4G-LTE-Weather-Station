@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # weather-power-saver
 #
@@ -14,11 +14,12 @@
 # Set ENABLE to "true" to let the script run at boot time.
 ENABLE="true"
 NAME=rtcwake
-WAKETIME=60
+WAKETIME=20
 SLEEPTIME=300
 DAYTIME=06:30
 NIGHTTIME=19:00
 NSLEEPTIME=1800
+TIMEOUT=60
 SETTIME="false"
 RUN=/usr/sbin/$NAME
 RUNOPTS="-m standby -s"
@@ -37,16 +38,47 @@ RUNOPTS="-m standby -s"
 # and status_of_proc is working.
 . /lib/lsb/init-functions
 
+timeout() {
+    echo
+    # Wait upto 60 seconds for online network
+    while [ $TIMEOUT -gt 0 ]; do 
+        echo -ne "Waiting for network... $TIMEOUT (seconds)\r";
+        sleep 1;
+        ping -c1 www.google.com &> /dev/null;
+        if [ $? -eq 0 ]; then 
+            let TIMEOUT=0
+        else
+            let TIMEOUT--
+        fi;
+    done
+    echo
+}
+
 while true; do
     sleep $WAKETIME
     service weewx stop
-    yes | /usr/bin/wee_device --clear
+    yes | wee_device --clear
+
+    HW_YEAR=$(hwclock | cut -c1-4)
+    YEAR=$(date "+%Y")
+    if [ "$HW_YEAR" -eq 2000 ]
+    then
+        echo "Setting system time..."
+        CONSOLE_TIME=$(echo -n $(wee_device --info | grep time) | cut -c15-)
+
+        if [ $(echo "$CONSOLE_TIME"| wc -c) -eq 20 ]
+        then
+            date -s "$CONSOLE_TIME"
+        fi
+        
+        hwclock -u -w
+    fi
     
     DAY=$(date "+%u")
     if [ "$DAY" -eq 7 ] && [ "$SETTIME" = "false" ]
     then
         SETTIME="true"
-        /usr/bin/wee_device --set-time
+        wee_device --set-time
     elif [ "$DAY" -ne 7 ]
     then
         SETTIME="false"
@@ -59,13 +91,15 @@ while true; do
     else
         $RUN $RUNOPTS $NSLEEPTIME
     fi
-       
+    
+    timeout
     service weewx start
     
     # Optional webcam (daytime only)
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
     then
-        fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" /tmp/image.jpg --exec /etc/upload.sh
+	BATTERY=$(/home/debian/ina219-tool -a -d /dev/i2c-2 40)
+        fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" --subtitle "$BATTERY"  /tmp/image.jpg --exec /etc/upload.sh
     fi
     
 done
