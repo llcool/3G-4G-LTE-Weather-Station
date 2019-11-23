@@ -13,3 +13,5 @@ Set MAX_SPEED="500"
 Set MIN_SPEED="300"
 
 # reboot
+
+If you are using the ELP camera, unscrew the camera body and unplug the power connector to the IR LED's.
