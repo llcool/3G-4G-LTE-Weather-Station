@@ -38,7 +38,7 @@ RUNOPTS="-m standby -s"
 # and status_of_proc is working.
 . /lib/lsb/init-functions
 
-timeout() {
+wait_until_online() {
     echo
     # Wait upto 60 seconds for online network
     while [ $TIMEOUT -gt 0 ]; do 
@@ -92,7 +92,7 @@ while true; do
         $RUN $RUNOPTS $NSLEEPTIME
     fi
     
-    timeout
+    wait_until_online
     service weewx start
     
     # Optional webcam (daytime only)
