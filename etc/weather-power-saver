@@ -60,31 +60,6 @@ while true; do
     service weewx stop
     yes | wee_device --clear
 
-    HW_YEAR=$(hwclock | cut -c1-4)
-    YEAR=$(date "+%Y")
-    if [ "$HW_YEAR" -eq 2000 ]
-    then
-        echo "Setting system time..."
-        CONSOLE_TIME=$(echo -n $(wee_device --info | grep time) | cut -c15-)
-
-        if [ $(echo "$CONSOLE_TIME"| wc -c) -eq 20 ]
-        then
-            date -s "$CONSOLE_TIME"
-        fi
-        
-        hwclock -u -w
-    fi
-    
-    DAY=$(date "+%u")
-    if [ "$DAY" -eq 7 ] && [ "$SETTIME" = "false" ]
-    then
-        SETTIME="true"
-        wee_device --set-time
-    elif [ "$DAY" -ne 7 ]
-    then
-        SETTIME="false"
-    fi
-    
     NOW=$(date "+%s")
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
     then
