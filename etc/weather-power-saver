@@ -2,7 +2,7 @@
 #
 # weather-power-saver
 #
-# This script is executed by power-saver.
+# This script is executed by rc.local.
 # Make sure that the script will "exit 0" on success or any other
 # value on error.
 #
@@ -16,14 +16,16 @@ ENABLE="true"
 NAME=rtcwake
 WAKETIME=20
 SLEEPTIME=300
-DAYTIME=06:30
-NIGHTTIME=19:00
+DAYTIME=07:30
+NIGHTTIME=20:00
 NSLEEPTIME=1800
 TIMEOUT=60
 SETTIME="false"
 RUN=/usr/sbin/$NAME
 RUNOPTS="-m standby -s"
 INA219=/home/debian/ina219-tool
+SUNRISE=/home/debian/sunrise.py
+SUNSET=/home/debian/sunset.py
 
 # if not enabled then exit gracefully
 [ "$ENABLE" = "true" ] || exit 0
@@ -74,12 +76,15 @@ while true; do
     # Optional webcam (daytime only)
     if [ "$NOW" -gt $(date "+%s" -d $DAYTIME) ] && [ "$NOW" -lt $(date "+%s" -d $NIGHTTIME) ]
     then
-        if [ -f "$INA219" ] && [ -x "$INA219" ]
+        if [ "$NOW" -gt $(date "+%s" -d $($SUNRISE)) ] && [ "$NOW" -lt $(date "+%s" -d $($SUNSET)) ]
         then
-            BATTERY=$($INA219 -a -d /dev/i2c-2 40)
-        fi
+            if [ -f "$INA219" ] && [ -x "$INA219" ]
+            then
+                BATTERY=$($INA219 -a -d /dev/i2c-2 40)
+            fi
 
-        fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" --subtitle "$BATTERY"  /tmp/image.jpg --exec /etc/upload.sh
+            fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" --subtitle "$BATTERY"  /tmp/image.jpg --exec /etc/upload.sh
+        fi
     fi
     
 done
