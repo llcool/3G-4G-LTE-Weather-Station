@@ -27,6 +27,8 @@ Copy uploadfile.sftp to /etc
 
 # apt install weewx
 
+# apt install python-ephem (option for addition power saving, sun rise and sun set)
+
 When you are done, weeWX will be running in the background as a daemon.
 
 If you are using a third-party weather service. EG. Weather underground. 
