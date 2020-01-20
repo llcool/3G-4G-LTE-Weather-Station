@@ -19,6 +19,7 @@ Hardware:
 * 20W 12V Photonic Universe solar panel
 * 12v 7ah Sealed Lead Acid Rechargeable Battery
 * ELP 2MP Full HD Night Vision H.264 Webcam Bullet Waterproof 30fps MJPEG USB Camera (optional)
+* INA219 I2C Module Bidirectional DC Current Power Monitoring (optional)
   
 Software:
 ---------
