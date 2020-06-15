@@ -1,0 +1,8 @@
+INA219
+Connecting the INA219 to a Beaglebone Black
+
+INA219      Beaglebone Black
+Vcc <-----> VDD_3V3 (P9_4)
+Gnd <-----> GND (P9_2)
+Scl <-----> I2C1_SCL (P9_17) (MODE2)
+Sda <-----> I2C1_SCL (P9_18) (MODE2)
