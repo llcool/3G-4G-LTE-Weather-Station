@@ -83,7 +83,7 @@ while true; do
                 BATTERY=$($INA219 -a -d /dev/i2c-2 40)
             fi
 
-            fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 75 --title "NHPC webcam - East Hill" --subtitle "$BATTERY"  /tmp/image.jpg --exec /etc/upload.sh
+            fswebcam -r 1280x720 -S 100 --timestamp "%H:%M:%S (%Z) %a %d %B %Y" -d /dev/video0 --jpeg 85 --title "NHPC webcam - East Hill" --subtitle "$BATTERY"  /tmp/image.jpg --exec /etc/upload.sh
         fi
     fi
     
