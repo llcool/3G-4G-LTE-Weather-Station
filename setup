@@ -63,7 +63,7 @@ while true; do
     esac
 done
 
-Add to .bash_logut
+Add to .bash_logout
 
 # Start power saving?
 while true; do
