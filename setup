@@ -34,7 +34,7 @@ Copy uploadfile.sftp to /etc
 When you are done, weeWX will be running in the background as a daemon.
 
 If you are using a third-party weather service. EG. Weather underground. 
-Edit the /etc/weewx/weewx.conf add your usename ans password.
+Edit the /etc/weewx/weewx.conf add your usename and password.
 
 NOTE: vantage: LOOP try #1; error: Expected to read 99 chars; got 0 instead
 edit /usr/shared/weewx/weewx/drivers/vantage.py
