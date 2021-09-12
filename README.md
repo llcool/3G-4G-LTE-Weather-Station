@@ -1,4 +1,4 @@
-# GPRS-Weather-Station
+# 3G/4G LTE Weather Station
 GPRS for Davis Weather Station using a Beaglebone Black and Debian custom firmware (kernel supports standby).
 
 The project is for my local paragliding club to setup a Davis Weather in a remote location with internet access.
@@ -14,7 +14,7 @@ Hardware:
 * USB A mini cable
 * USB (optional powered) hub (Belkin Ultra Slim 4 Port USB powered hub 5v input)
 * Huawei 3G modem (E3531)
-* 4G/3G SIM card
+* 3G/4G SIM card
 * Sunix 10A 12V/24V Solar Charge Regulator
 * 20W 12V Photonic Universe solar panel
 * 12v 7ah Sealed Lead Acid Rechargeable Battery
